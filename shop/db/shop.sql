@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 12 2022 г., 21:18
+-- Время создания: Май 02 2022 г., 09:12
 -- Версия сервера: 8.0.24
--- Версия PHP: 7.4.27
+-- Версия PHP: 7.4.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,32 @@ SET time_zone = "+00:00";
 --
 -- База данных: `shop`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int NOT NULL,
+  `session_id` text NOT NULL,
+  `products_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int NOT NULL,
+  `name` text NOT NULL,
+  `phone` text NOT NULL,
+  `address` text NOT NULL,
+  `session_id` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -41,7 +67,8 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`id`, `name`, `description`, `price`) VALUES
 (1, 'Чай', 'Цейлонский', 22),
 (2, 'Пицца', 'Пепперони', 43),
-(3, 'Одежда', 'Брендовая', 34);
+(3, 'Одежда', 'Брендовая', 34),
+(4, 'Пицца', 'Описание', 125);
 
 -- --------------------------------------------------------
 
@@ -60,11 +87,24 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `login`, `pass`) VALUES
-(1, 'admin', '123');
+(1, 'admin', '123'),
+(2, 'user', 'qwerty');
 
 --
 -- Индексы сохранённых таблиц
 --
+
+--
+-- Индексы таблицы `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `products`
@@ -83,16 +123,28 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
