@@ -65,6 +65,13 @@ class Db
         return $STH->fetch();
     }
 
+    public function queryLimit($sql, $limit) {
+        $STH = $this->getConnection()->prepare($sql);
+        $STH->bindValue(1, $limit, \PDO::PARAM_INT);
+        $STH->execute();
+        return $STH->fetchAll();
+    }
+
     public function queryOne($sql, $params = [])
     {
         return $this->query($sql, $params)->fetch();
